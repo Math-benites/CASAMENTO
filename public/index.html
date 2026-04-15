@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Casamento Matheus & Iris | 10 de Novembro de 2026</title>
+  <meta name="description" content="Estamos nos casando! Celebre conosco o amor de Matheus e Iris no dia 10 de novembro de 2026.">
+  <meta name="theme-color" content="#1a1a2e">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Particles Canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Navigation -->
+  <nav id="main-nav" class="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">M & I</a>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="nav-menu" class="nav-menu">
+        <li><a href="#hero" class="nav-link active">Início</a></li>
+        <li><a href="#countdown" class="nav-link">Contagem</a></li>
+        <li><a href="#story" class="nav-link">Nossa História</a></li>
+        <li><a href="#details" class="nav-link">Cerimônia</a></li>
+        <li><a href="#gallery" class="nav-link">Galeria</a></li>
+        <li><a href="#rsvp" class="nav-link">Confirmar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-bg-image" style="background-image: url('/images/hero-bg.png')"></div>
+    <div class="hero-content">
+      <div class="hero-ornament top">✦</div>
+      <p class="hero-subtitle fade-up">Celebre conosco</p>
+      <h1 class="hero-title fade-up">
+        <span class="name-first">Iris</span>
+        <span class="ampersand">&</span>
+        <span class="name-second">Matheus</span>
+      </h1>
+      <div class="hero-divider fade-up">
+        <span class="line"></span>
+        <span class="heart">♥</span>
+        <span class="line"></span>
+      </div>
+      <p class="hero-date fade-up">10 de Novembro de 2026</p>
+      <a href="#countdown" class="hero-cta fade-up">
+        <span>Descubra Mais</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </a>
+      <div class="hero-ornament bottom">✦</div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="mouse">
+        <div class="wheel"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown Section -->
+  <section id="countdown" class="section countdown-section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Falta pouco</span>
+        <h2 class="section-title">Contagem Regressiva</h2>
+        <div class="section-divider">
+          <span class="line"></span>
+          <span class="diamond">◆</span>
+          <span class="line"></span>
+        </div>
+      </div>
+      <div class="countdown-grid fade-up" id="countdown-timer">
+        <div class="countdown-card">
+          <div class="countdown-value" id="days">000</div>
+          <div class="countdown-label">Dias</div>
+          <div class="countdown-glow"></div>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-card">
+          <div class="countdown-value" id="hours">00</div>
+          <div class="countdown-label">Horas</div>
+          <div class="countdown-glow"></div>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-card">
+          <div class="countdown-value" id="minutes">00</div>
+          <div class="countdown-label">Minutos</div>
+          <div class="countdown-glow"></div>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-card">
+          <div class="countdown-value" id="seconds">00</div>
+          <div class="countdown-label">Segundos</div>
+          <div class="countdown-glow"></div>
+        </div>
+      </div>
+      <p class="countdown-message fade-up">Cada segundo nos aproxima do nosso grande dia ✨</p>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section id="story" class="section story-section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Como tudo começou</span>
+        <h2 class="section-title">Nossa História</h2>
+        <div class="section-divider">
+          <span class="line"></span>
+          <span class="diamond">◆</span>
+          <span class="line"></span>
+        </div>
+      </div>
+      <div class="story-timeline">
+        <div class="timeline-line"></div>
+        <div class="story-item fade-up">
+          <div class="story-dot">
+            <span class="dot-inner">💫</span>
+          </div>
+          <div class="story-card">
+            <span class="story-date">O Encontro</span>
+            <h3 class="story-card-title">Quando Nos Conhecemos</h3>
+            <p class="story-text">Dois caminhos diferentes que se cruzaram no momento perfeito. O destino conspirou para que nos encontrássemos, e desde o primeiro olhar, soubemos que algo especial estava começando.</p>
+          </div>
+        </div>
+        <div class="story-item fade-up">
+          <div class="story-dot">
+            <span class="dot-inner">💕</span>
+          </div>
+          <div class="story-card">
+            <span class="story-date">O Primeiro Encontro</span>
+            <h3 class="story-card-title">As Borboletas no Estômago</h3>
+            <p class="story-text">Conversas que duravam horas, risadas que ecoavam sem fim. Cada encontro nos aproximava mais, transformando uma simples amizade em um amor profundo e verdadeiro.</p>
+          </div>
+        </div>
+        <div class="story-item fade-up">
+          <div class="story-dot">
+            <span class="dot-inner">💍</span>
+          </div>
+          <div class="story-card">
+            <span class="story-date">O Pedido</span>
+            <h3 class="story-card-title">O Sim Mais Lindo</h3>
+            <p class="story-text">Com o coração transbordando de amor e certeza, veio o pedido. E com lágrimas de felicidade, veio o "Sim!" que mudaria nossas vidas para sempre.</p>
+          </div>
+        </div>
+        <div class="story-item fade-up">
+          <div class="story-dot">
+            <span class="dot-inner">💒</span>
+          </div>
+          <div class="story-card">
+            <span class="story-date">10 de Novembro de 2026</span>
+            <h3 class="story-card-title">O Grande Dia</h3>
+            <p class="story-text">E agora, estamos prestes a selar nosso amor diante de Deus, família e amigos. O dia mais esperado de nossas vidas está chegando!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details Section -->
+  <section id="details" class="section details-section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Informações</span>
+        <h2 class="section-title">Cerimônia & Recepção</h2>
+        <div class="section-divider">
+          <span class="line"></span>
+          <span class="diamond">◆</span>
+          <span class="line"></span>
+        </div>
+      </div>
+      <div class="details-grid">
+        <div class="detail-card fade-up">
+          <div class="detail-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 class="detail-title">Cerimônia</h3>
+          <div class="detail-info">
+            <p class="detail-text">
+              <strong>📅 Data:</strong> 10 de Novembro de 2026
+            </p>
+            <p class="detail-text">
+              <strong>🕐 Horário:</strong> A definir
+            </p>
+            <p class="detail-text">
+              <strong>📍 Local:</strong> A definir
+            </p>
+          </div>
+          <div class="detail-accent"></div>
+        </div>
+        <div class="detail-card fade-up">
+          <div class="detail-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3 class="detail-title">Recepção</h3>
+          <div class="detail-info">
+            <p class="detail-text">
+              <strong>🎉 Festa:</strong> Após a cerimônia
+            </p>
+            <p class="detail-text">
+              <strong>🍽️ Jantar:</strong> Incluso
+            </p>
+            <p class="detail-text">
+              <strong>💃 Dança:</strong> Até o amanhecer
+            </p>
+          </div>
+          <div class="detail-accent"></div>
+        </div>
+        <div class="detail-card fade-up">
+          <div class="detail-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <h3 class="detail-title">Dress Code</h3>
+          <div class="detail-info">
+            <p class="detail-text">
+              <strong>👔 Homens:</strong> Traje Social
+            </p>
+            <p class="detail-text">
+              <strong>👗 Mulheres:</strong> Traje Social
+            </p>
+            <p class="detail-text">
+              <strong>🚫 Evitar:</strong> Branco
+            </p>
+          </div>
+          <div class="detail-accent"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section gallery-section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Momentos</span>
+        <h2 class="section-title">Nossa Galeria</h2>
+        <div class="section-divider">
+          <span class="line"></span>
+          <span class="diamond">◆</span>
+          <span class="line"></span>
+        </div>
+      </div>
+      <div class="gallery-grid fade-up">
+        <div class="gallery-item large">
+          <img src="/images/hero-bg.png" alt="Matheus e Iris" loading="lazy">
+          <div class="gallery-overlay">
+            <span>Nosso Amor ♥</span>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/floral.png" alt="Decoração floral" loading="lazy">
+          <div class="gallery-overlay">
+            <span>Detalhes 🌸</span>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/rings.png" alt="Alianças" loading="lazy">
+          <div class="gallery-overlay">
+            <span>Para Sempre 💍</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP Section -->
+  <section id="rsvp" class="section rsvp-section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <span class="section-tag">Esperamos você</span>
+        <h2 class="section-title">Confirme sua Presença</h2>
+        <div class="section-divider">
+          <span class="line"></span>
+          <span class="diamond">◆</span>
+          <span class="line"></span>
+        </div>
+        <p class="section-subtitle">Ficaremos muito felizes com a sua presença neste dia tão especial!</p>
+      </div>
+      <form id="rsvp-form" class="rsvp-form fade-up">
+        <div class="form-group">
+          <label for="rsvp-name" class="form-label">Seu Nome Completo</label>
+          <input type="text" id="rsvp-name" class="form-input" placeholder="Digite seu nome" required>
+          <div class="input-border"></div>
+        </div>
+        <div class="form-group">
+          <label for="rsvp-guests" class="form-label">Número de Acompanhantes</label>
+          <select id="rsvp-guests" class="form-input form-select">
+            <option value="1">Somente eu</option>
+            <option value="2">Eu + 1 acompanhante</option>
+            <option value="3">Eu + 2 acompanhantes</option>
+            <option value="4">Eu + 3 acompanhantes</option>
+          </select>
+          <div class="input-border"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Você poderá comparecer?</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="attending" value="yes" checked>
+              <span class="radio-custom"></span>
+              <span>Sim, estarei lá! 🎉</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="attending" value="no">
+              <span class="radio-custom"></span>
+              <span>Infelizmente não poderei 😢</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="rsvp-message" class="form-label">Mensagem para os Noivos (opcional)</label>
+          <textarea id="rsvp-message" class="form-input form-textarea" placeholder="Deixe uma mensagem especial..." rows="4"></textarea>
+          <div class="input-border"></div>
+        </div>
+        <button type="submit" id="rsvp-submit" class="btn-submit">
+          <span class="btn-text">Confirmar Presença</span>
+          <span class="btn-icon">💌</span>
+          <div class="btn-shimmer"></div>
+        </button>
+      </form>
+      <div id="rsvp-success" class="rsvp-success hidden">
+        <div class="success-icon">✨</div>
+        <h3>Obrigado!</h3>
+        <p>Sua confirmação foi recebida com sucesso. Mal podemos esperar para celebrar com você!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-ornament">✦ ✦ ✦</div>
+      <h2 class="footer-names">Matheus & Iris</h2>
+      <p class="footer-date">10 de Novembro de 2026</p>
+      <div class="footer-divider">
+        <span class="line"></span>
+        <span class="heart">♥</span>
+        <span class="line"></span>
+      </div>
+      <p class="footer-quote">"O amor é paciente, o amor é bondoso..." — 1 Coríntios 13:4</p>
+      <p class="footer-copy">Feito com ♥ para Matheus & Iris</p>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast hidden">
+    <span id="toast-message"></span>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
