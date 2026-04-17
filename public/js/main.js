@@ -293,7 +293,7 @@ function initPix() {
   });
 
   function showSuccess() {
-    showToast('Chave Pix copiada com sucesso! 💎');
+    showToast('💎 Chave Pix na mão! O resto é com você');
     const iconWrapper = copyBtn.querySelector('.copy-icon-wrapper');
     const originalSVG = iconWrapper.innerHTML;
     
