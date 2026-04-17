@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
   initScrollAnimations();
   initRSVP();
+  initPix();
 });
 
 /* ---------- Floating Particles ---------- */
@@ -217,6 +218,8 @@ function initScrollAnimations() {
 /* ---------- RSVP Form ---------- */
 function initRSVP() {
   const form = document.getElementById('rsvp-form');
+  if (!form) return;
+  
   const successEl = document.getElementById('rsvp-success');
   const submitBtn = document.getElementById('rsvp-submit');
 
@@ -264,6 +267,62 @@ function initRSVP() {
       submitBtn.querySelector('.btn-text').textContent = 'Confirmar Presença';
     }
   });
+}
+
+/* ---------- Pix Copy Logic ---------- */
+function initPix() {
+  const copyBtn = document.getElementById('copy-pix-btn');
+  const pixKey = document.getElementById('pix-key-value');
+
+  if (!copyBtn || !pixKey) return;
+
+  copyBtn.addEventListener('click', () => {
+    const textToCopy = pixKey.textContent;
+    
+    // Fallback for non-https or older browsers
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        showSuccess();
+      }).catch(err => {
+        console.error('Erro ao copiar: ', err);
+        fallbackCopyTextToClipboard(textToCopy);
+      });
+    } else {
+      fallbackCopyTextToClipboard(textToCopy);
+    }
+  });
+
+  function showSuccess() {
+    showToast('Chave Pix copiada com sucesso! 💎');
+    copyBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    `;
+    setTimeout(() => {
+      copyBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      `;
+    }, 2000);
+  }
+
+  function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      showSuccess();
+    } catch (err) {
+      showToast('Erro ao copiar. Selecione manualmente.');
+    }
+    document.body.removeChild(textArea);
+  }
 }
 
 /* ---------- Toast Notification ---------- */
