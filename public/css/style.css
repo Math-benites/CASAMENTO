@@ -1297,6 +1297,20 @@ a {
   padding: 10px 20px;
   border-radius: 8px;
   border: 1px dashed var(--border-accent);
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  color: inherit;
+  font: inherit;
+}
+
+.pix-key-wrapper:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-style: solid;
+  transform: scale(1.02);
+}
+
+.pix-key-wrapper:active {
+  transform: scale(0.98);
 }
 
 .pix-key {
@@ -1307,31 +1321,25 @@ a {
   letter-spacing: 1px;
 }
 
-.copy-btn {
+.copy-icon-wrapper {
   background: var(--gold-primary);
   color: var(--bg-primary);
-  border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: var(--transition-bounce);
+  transition: var(--transition-smooth);
   box-shadow: 0 4px 15px var(--gold-glow);
 }
 
-.copy-btn:hover {
+.pix-key-wrapper:hover .copy-icon-wrapper {
   background: var(--gold-light);
-  transform: scale(1.1);
+  box-shadow: 0 6px 20px var(--gold-glow);
 }
 
-.copy-btn:active {
-  transform: scale(0.9);
-}
-
-.copy-btn svg {
-  width: 18px;
-  height: 18px;
+.copy-icon-wrapper svg {
+  width: 16px;
+  height: 16px;
 }
