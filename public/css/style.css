@@ -1267,11 +1267,12 @@ a {
   background: rgba(13, 13, 26, 0.4);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
-  padding: 20px;
+  padding: 15px 25px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 20px;
   transition: var(--transition-smooth);
 }
 
