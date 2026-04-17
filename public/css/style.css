@@ -821,17 +821,17 @@ a {
   background: linear-gradient(90deg, transparent, var(--gold-primary), var(--rose-primary), var(--gold-primary), transparent);
 }
 
-.whatsapp-btn {
+.rsvp-gold-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 16px 36px;
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  color: #fff;
+  padding: 16px 40px;
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+  color: var(--bg-primary);
   font-family: var(--font-elegant);
   font-size: 1.15rem;
-  font-weight: 500;
-  letter-spacing: 1.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
@@ -839,23 +839,13 @@ a {
   text-decoration: none;
   position: relative;
   z-index: 2;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
-  animation: pulseWhatsapp 2.5s ease-in-out infinite;
+  box-shadow: 0 4px 20px var(--gold-glow);
 }
 
-@keyframes pulseWhatsapp {
-  0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3); transform: scale(1); }
-  50% { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5); transform: scale(1.03); }
-}
-
-.whatsapp-btn:hover {
-  background: linear-gradient(135deg, #2be06f, #1aad6e);
-  box-shadow: 0 8px 40px rgba(37, 211, 102, 0.5);
-  transform: scale(1.05);
-}
-
-.whatsapp-btn svg {
-  flex-shrink: 0;
+.rsvp-gold-btn:hover {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+  box-shadow: 0 8px 40px var(--gold-glow);
+  transform: translateY(-2px);
 }
 
 .rsvp-form {
