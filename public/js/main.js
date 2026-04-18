@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initRSVP();
   initPix();
+  initMusic();
 });
 
 /* ---------- Floating Particles ---------- */
@@ -337,6 +338,69 @@ function showToast(message) {
     toast.classList.remove('show');
     setTimeout(() => toast.classList.add('hidden'), 400);
   }, 3000);
+}
+
+/* ---------- Background Music Logic ---------- */
+function initMusic() {
+  const music = document.getElementById('bg-music');
+  const control = document.getElementById('music-control');
+  
+  if (!music || !control) return;
+
+  // Initial setup: start at 10 seconds and muted for autoplay
+  music.currentTime = 10;
+  music.volume = 0;
+
+  const startMusic = () => {
+    music.play().then(() => {
+      control.classList.add('playing');
+      fadeIn(music);
+      // Remove interaction listeners once playing
+      document.removeEventListener('click', startMusic);
+      document.removeEventListener('scroll', startMusic);
+      document.removeEventListener('touchstart', startMusic);
+    }).catch(error => {
+      console.log('Autoplay prevented. Waiting for interaction.');
+    });
+  };
+
+  // Attempt autoplay immediately
+  startMusic();
+
+  // Fallback: start on first user interaction
+  document.addEventListener('click', startMusic);
+  document.addEventListener('scroll', startMusic);
+  document.addEventListener('touchstart', startMusic);
+
+  // Toggle Play/Pause
+  control.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent re-triggering startMusic if already active
+    if (music.paused) {
+      music.play();
+      control.classList.add('playing');
+      fadeIn(music);
+    } else {
+      music.pause();
+      control.classList.remove('playing');
+      music.volume = 0;
+    }
+  });
+}
+
+function fadeIn(audio) {
+  let vol = 0;
+  const targetVol = 0.6; // Let's keep it comfortable
+  const speed = 0.02;
+  
+  audio.volume = 0;
+  const interval = setInterval(() => {
+    if (vol < targetVol) {
+      vol += speed;
+      audio.volume = Math.min(vol, targetVol);
+    } else {
+      clearInterval(interval);
+    }
+  }, 100);
 }
 
 /* ---------- Confetti Effect ---------- */

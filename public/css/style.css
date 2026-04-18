@@ -1338,8 +1338,76 @@ a {
   background: var(--gold-light);
   box-shadow: 0 6px 20px var(--gold-glow);
 }
-
 .copy-icon-wrapper svg {
   width: 16px;
   height: 16px;
+}
+
+/* ---------- Music Control ---------- */
+.music-control {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-bounce);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.music-control:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+  border-color: var(--gold-primary);
+}
+
+.music-icon {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.music-control .bar {
+  width: 3px;
+  background: var(--gold-primary);
+  border-radius: 2px;
+  transition: height 0.3s ease;
+}
+
+/* Playing Animation */
+.music-control.playing .bar {
+  animation: musicBar 1.2s ease-in-out infinite;
+}
+
+.music-control.playing .bar:nth-child(1) { height: 60%; animation-delay: 0.1s; }
+.music-control.playing .bar:nth-child(2) { height: 100%; animation-delay: 0.3s; }
+.music-control.playing .bar:nth-child(3) { height: 80%; animation-delay: 0.2s; }
+.music-control.playing .bar:nth-child(4) { height: 50%; animation-delay: 0.4s; }
+
+/* Paused State */
+.music-control .bar { height: 4px; }
+
+@keyframes musicBar {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.5); }
+}
+
+/* Adjust for Pix/Footer overlap if necessary */
+@media (max-width: 600px) {
+  .music-control {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+  }
 }
