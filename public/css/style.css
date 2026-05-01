@@ -720,6 +720,18 @@ a {
   color: var(--text-primary);
 }
 
+.details-grid .detail-card:first-child .detail-text strong {
+  color: var(--gold-primary);
+}
+
+.details-grid .detail-card:nth-child(2) .detail-text strong {
+  color: var(--gold-primary);
+}
+
+.detail-label-gold {
+  color: var(--gold-primary);
+}
+
 /* ---------- Gallery Section ---------- */
 .gallery-section {
   background: var(--bg-primary);
