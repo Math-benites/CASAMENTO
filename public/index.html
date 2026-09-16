@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Casamento Matheus & Iris | 10 de Novembro de 2026</title>
+  <title>Casamento Matheus & Iris | 11 de Novembro de 2026</title>
   <meta name="description"
-    content="Estamos nos casando! Celebre conosco o amor de Matheus e Iris no dia 10 de novembro de 2026.">
+    content="Estamos nos casando! Celebre conosco o amor de Matheus e Iris no dia 11 de novembro de 2026.">
   <meta name="theme-color" content="#1a1a2e">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +17,22 @@
 </head>
 
 <body>
+  <!-- Invite Welcome Overlay -->
+  <div id="invite-overlay" class="invite-overlay">
+    <div class="invite-overlay-content">
+      <div class="hero-ornament top">✦</div>
+      <p class="invite-overlay-label" id="invite-overlay-label">Um convite especial para</p>
+      <h2 class="invite-overlay-name" id="invite-overlay-name"></h2>
+      <div class="hero-divider">
+        <span class="line"></span>
+        <span class="heart">♥</span>
+        <span class="line"></span>
+      </div>
+      <p class="invite-overlay-message" id="invite-overlay-message"></p>
+      <div class="hero-ornament bottom">✦</div>
+    </div>
+  </div>
+
   <!-- Particles Canvas -->
   <canvas id="particles-canvas"></canvas>
 
@@ -35,7 +51,7 @@
         <li><a href="#details" class="nav-link">Cerimônia</a></li>
         <li><a href="#gifts" class="nav-link">Presentes</a></li>
         <li><a href="#gallery" class="nav-link">Galeria</a></li>
-        <li><a href="#rsvp" class="nav-link">Confirmar</a></li>
+        <li id="nav-rsvp-item"><a href="#rsvp" class="nav-link">Confirmar</a></li>
       </ul>
     </div>
   </nav>
@@ -46,7 +62,7 @@
     <div class="hero-bg-image" style="background-image: url('/images/hero-bg.png')"></div>
     <div class="hero-content">
       <div class="hero-ornament top">✦</div>
-      <p class="hero-subtitle fade-up">Celebre conosco</p>
+      <p class="hero-subtitle fade-up" id="hero-greeting">Celebre conosco</p>
       <h1 class="hero-title fade-up">
         <span class="name-first">Iris</span>
         <span class="ampersand">&</span>
@@ -57,7 +73,7 @@
         <span class="heart">♥</span>
         <span class="line"></span>
       </div>
-      <p class="hero-date fade-up">10 de Novembro de 2026</p>
+      <p class="hero-date fade-up">11 de Novembro de 2026</p>
       <a href="#countdown" class="hero-cta fade-up">
         <span>Descubra Mais</span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -77,8 +93,8 @@
   <section id="countdown" class="section countdown-section">
     <div class="section-container">
       <div class="section-header fade-up">
-        <span class="section-tag">Falta pouco</span>
-        <h2 class="section-title">Contagem Regressiva</h2>
+        <span class="section-tag" id="countdown-tag">Falta pouco</span>
+        <h2 class="section-title" id="countdown-heading">Contagem Regressiva</h2>
         <div class="section-divider">
           <span class="line"></span>
           <span class="diamond">◆</span>
@@ -110,7 +126,7 @@
           <div class="countdown-glow"></div>
         </div>
       </div>
-      <p class="countdown-message fade-up">Cada segundo nos aproxima do nosso grande dia ✨</p>
+      <p class="countdown-message fade-up" id="countdown-message">Cada segundo nos aproxima do nosso grande dia ✨</p>
     </div>
   </section>
 
@@ -142,7 +158,7 @@
                   <path fill-rule="evenodd" d="M17,2 C17.5522847,2 18,2.44771525 18,3 L18,4 L19,4 C20.6568542,4 22,5.34314575 22,7 L22,19 C22,20.6568542 20.6568542,22 19,22 L5,22 C3.34314575,22 2,20.6568542 2,19 L2,7 C2,5.34314575 3.34314575,4 5,4 L6,4 L6,3 C6,2.44771525 6.44771525,2 7,2 C7.55228475,2 8,2.44771525 8,3 L8,4 L16,4 L16,3 C16,2.44771525 16.4477153,2 17,2 Z M20,12 L4,12 L4,19 C4,19.5522847 4.44771525,20 5,20 L19,20 C19.5522847,20 20,19.5522847 20,19 L20,12 Z M17,14 C17.5522847,14 18,14.4477153 18,15 L18,17 C18,17.5522847 17.5522847,18 17,18 L15,18 C14.4477153,18 14,17.5522847 14,17 L14,15 C14,14.4477153 14.4477153,14 15,14 L17,14 Z M6,6 L5,6 C4.44771525,6 4,6.44771525 4,7 L4,10 L20,10 L20,7 C20,6.44771525 19.5522847,6 19,6 L18,6 L18,7 C18,7.55228475 17.5522847,8 17,8 C16.4477153,8 16,7.55228475 16,7 L16,6 L8,6 L8,7 C8,7.55228475 7.55228475,8 7,8 C6.44771525,8 6,7.55228475 6,7 L6,6 Z"/>
                 </svg>
                 Data:
-              </strong> 10 de Novembro de 2026
+              </strong> 11 de Novembro de 2026
             </p>
             <p class="detail-text">
               <strong>
@@ -150,7 +166,7 @@
                   <path fill-rule="evenodd" d="M12,2 C17.5228475,2 22,6.4771525 22,12 C22,17.5228475 17.5228475,22 12,22 C6.4771525,22 2,17.5228475 2,12 C2,6.4771525 6.4771525,2 12,2 Z M12,4 C7.581722,4 4,7.581722 4,12 C4,16.418278 7.581722,20 12,20 C16.418278,20 20,16.418278 20,12 C20,7.581722 16.418278,4 12,4 Z M12,6 C12.5128358,6 12.9355072,6.38604019 12.9932723,6.88337887 L13,7 L13,11.5857864 L14.7071068,13.2928932 C15.0976311,13.6834175 15.0976311,14.3165825 14.7071068,14.7071068 C14.3466228,15.0675907 13.7793918,15.0953203 13.3871006,14.7902954 L13.2928932,14.7071068 L11.2928932,12.7071068 C11.1366129,12.5508265 11.0374017,12.3481451 11.0086724,12.131444 L11,12 L11,7 C11,6.44771525 11.4477153,6 12,6 Z"/>
                 </svg>
                 Horário:
-              </strong> A definir
+              </strong> 17:00
             </p>
             <p class="detail-text">
               <strong>
@@ -158,7 +174,7 @@
                   <path fill-rule="evenodd" d="M12,2 C17.5228475,2 22,6.4771525 22,12 C22,17.5228475 17.5228475,22 12,22 C6.4771525,22 2,17.5228475 2,12 C2,6.4771525 6.4771525,2 12,2 Z M17.9842695,7.39078625 C18.1985588,6.64477525 17.4973604,5.9435768 16.7513494,6.1578661 L16.6494246,6.19284365 L9.57835679,9.02127078 L9.47282273,9.07079854 C9.30957453,9.15937167 9.17428758,9.29167162 9.08209683,9.45256344 L9.02127078,9.57835679 L6.19284365,16.6494246 L6.1578661,16.7513494 C5.9435768,17.4973604 6.64477525,18.1985588 7.39078625,17.9842695 L7.49271102,17.949292 L14.5637788,15.1208648 L14.6693129,15.0713371 C14.8325611,14.982764 14.967848,14.850464 15.0600388,14.6895722 L15.1208648,14.5637788 L17.949292,7.49271102 L17.9842695,7.39078625 Z M12,10 C13.1045695,10 14,10.8954305 14,12 C14,13.1045695 13.1045695,14 12,14 C10.8954305,14 10,13.1045695 10,12 C10,10.8954305 10.8954305,10 12,10 Z"/>
                 </svg>
                 Local:
-              </strong> Florianópolis - SC
+              </strong> <a href="https://maps.app.goo.gl/152RMyYxv97RqK9F7" target="_blank" rel="noopener" style="color: var(--gold-light); text-decoration: underline;">Cartório Maria Alice Costa da Silva</a>
             </p>
           </div>
           <div class="detail-accent"></div>
@@ -343,6 +359,14 @@
               <line x1="12" y1="3" x2="12" y2="15"></line>
             </svg>
           </a>
+
+          <div id="gallery-carousel" class="gallery-carousel hidden">
+            <div class="gallery-track" id="gallery-track"></div>
+            <button class="gallery-arrow gallery-prev" id="gallery-prev" aria-label="Foto anterior">‹</button>
+            <button class="gallery-arrow gallery-next" id="gallery-next" aria-label="Próxima foto">›</button>
+            <div class="gallery-dots" id="gallery-dots"></div>
+          </div>
+
           <div class="detail-accent"></div>
         </div>
       </div>
@@ -350,7 +374,7 @@
   </section>
 
   <!-- RSVP Section -->
-  <section id="rsvp" class="section rsvp-section">
+  <section id="rsvp" class="section rsvp-section hidden">
     <div class="section-container">
       <div class="section-header fade-up">
         <span class="section-tag">Esperamos você</span>
@@ -369,14 +393,45 @@
               <polyline points="22,6 12,13 2,6"></polyline>
             </svg>
           </div>
-          <h3 style="font-family: var(--font-display); font-size: 1.6rem; color: var(--gold-light); margin-bottom: 16px;">Sua presença é essencial!</h3>
-          <p class="detail-text" style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto;">
+          <h3 style="font-family: var(--font-display); font-size: 1.6rem; color: var(--gold-light); margin-bottom: 16px;" id="rsvp-title">Sua presença é essencial!</h3>
+          <p class="detail-text" style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto;" id="rsvp-message-text">
             Ficaremos muito felizes com a sua presença neste dia tão especial!<br>
             Clique abaixo para nos avisar que você vem 💌
           </p>
-          <a href="https://api.whatsapp.com/send?phone=5548991217882&text=Vou%20estar%20presente%20no%20seu%20casamento!" target="_blank" class="rsvp-gold-btn">
-            Confirmar Presença
-          </a>
+
+          <div id="rsvp-no-token" class="hidden" style="margin-bottom: 10px;">
+            <a href="https://api.whatsapp.com/send?phone=5548991217882&text=Vou%20estar%20presente%20no%20seu%20casamento!" target="_blank" class="rsvp-gold-btn">
+              Confirmar Presença
+            </a>
+          </div>
+
+          <form id="rsvp-form" class="rsvp-form hidden">
+            <div class="form-group radio-group">
+              <label class="radio-label">
+                <input type="radio" name="attending" value="yes" checked>
+                <span class="radio-custom"></span>
+                <span>Vou comparecer</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="attending" value="no">
+                <span class="radio-custom"></span>
+                <span>Não poderei ir</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rsvp-note">Mensagem para os noivos (opcional)</label>
+              <textarea id="rsvp-note" name="message" rows="3" class="form-input form-textarea"></textarea>
+            </div>
+            <button type="submit" id="rsvp-submit" class="rsvp-gold-btn">
+              <span class="btn-text">Confirmar Presença</span>
+            </button>
+          </form>
+
+          <div id="rsvp-success" class="hidden">
+            <p class="detail-text" style="font-size: 1.2rem;" id="rsvp-success-text">Confirmação recebida! Obrigado 💌</p>
+            <button type="button" id="rsvp-change-mind" class="rsvp-gold-btn" style="margin-top: 24px;">Mudar de ideia</button>
+          </div>
+
           <div class="detail-accent"></div>
         </div>
       </div>
@@ -388,7 +443,7 @@
     <div class="footer-content">
       <div class="footer-ornament">✦ ✦ ✦</div>
       <h2 class="footer-names">Iris & Matheus</h2>
-      <p class="footer-date">10 de Novembro de 2026</p>
+      <p class="footer-date">11 de Novembro de 2026</p>
       <div class="footer-divider">
         <span class="line"></span>
         <span class="heart">♥</span>
