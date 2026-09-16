@@ -3,15 +3,32 @@
    Main JavaScript - Interactions & Animations
    ============================================ */
 
+const WEDDING_DATE = new Date('2026-11-11T17:00:00-03:00').getTime();
+
 document.addEventListener('DOMContentLoaded', () => {
   initParticles();
   initNavigation();
   initCountdown();
   initScrollAnimations();
-  initRSVP();
+  initInvite();
   initPix();
   initMusic();
+  initGalleryCarousel();
+  initRsvpVisibility();
 });
+
+/* ---------- Visibilidade do RSVP (some depois do casamento) ---------- */
+function initRsvpVisibility() {
+  const rsvpSection = document.getElementById('rsvp');
+  const navItem = document.getElementById('nav-rsvp-item');
+  if (!rsvpSection) return;
+
+  if (Date.now() < WEDDING_DATE) {
+    rsvpSection.classList.remove('hidden');
+  } else {
+    navItem?.classList.add('hidden');
+  }
+}
 
 /* ---------- Floating Particles ---------- */
 function initParticles() {
@@ -148,22 +165,43 @@ function initNavigation() {
 
 /* ---------- Countdown Timer ---------- */
 function initCountdown() {
-  const weddingDate = new Date('2026-11-10T16:00:00-03:00').getTime();
+  const weddingDate = WEDDING_DATE;
 
   const daysEl = document.getElementById('days');
   const hoursEl = document.getElementById('hours');
   const minutesEl = document.getElementById('minutes');
   const secondsEl = document.getElementById('seconds');
+  const tagEl = document.getElementById('countdown-tag');
+  const headingEl = document.getElementById('countdown-heading');
+  const messageEl = document.getElementById('countdown-message');
+
+  let switchedToMarried = false;
+
+  function switchToMarried() {
+    if (switchedToMarried) return;
+    switchedToMarried = true;
+    if (tagEl) tagEl.textContent = 'Já aconteceu';
+    if (headingEl) headingEl.textContent = 'Somos Casados!';
+    if (messageEl) messageEl.textContent = 'Cada segundo já é história nossa, como marido e mulher ✨';
+  }
 
   function updateCountdown() {
     const now = new Date().getTime();
     const diff = weddingDate - now;
 
     if (diff <= 0) {
-      daysEl.textContent = '0';
-      hoursEl.textContent = '0';
-      minutesEl.textContent = '0';
-      secondsEl.textContent = '0';
+      switchToMarried();
+
+      const elapsed = Math.abs(diff);
+      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+      animateValue(daysEl, days.toString().padStart(3, '0'));
+      animateValue(hoursEl, hours.toString().padStart(2, '0'));
+      animateValue(minutesEl, minutes.toString().padStart(2, '0'));
+      animateValue(secondsEl, seconds.toString().padStart(2, '0'));
       return;
     }
 
@@ -216,28 +254,136 @@ function initScrollAnimations() {
   fadeElements.forEach(el => observer.observe(el));
 }
 
-/* ---------- RSVP Form ---------- */
-function initRSVP() {
+/* ---------- Overlay de Boas-vindas do Convite ---------- */
+const CURIOUS_MESSAGES = [
+  'Esse cantinho aqui é só pra quem recebeu convite personalizado. Se você é família ou amigo(a) querido(a), chama a gente no zap que resolvemos esse mistério! 🕵️',
+  'Hmm, parece que você entrou pela porta dos fundos.',
+  'Ei, curioso(a)! Fica à vontade pra espiar o site, mas a mensagem especial é só com convite personalizado. Fala com a gente!'
+];
+
+function showInviteOverlay(guest) {
+  const overlay = document.getElementById('invite-overlay');
+  if (!overlay) return;
+
+  document.getElementById('invite-overlay-label').textContent = 'Um convite especial para';
+  document.getElementById('invite-overlay-name').textContent = guest.name;
+  document.getElementById('invite-overlay-message').textContent =
+    guest.custom_message || 'Estamos muito felizes em ter você conosco nesse dia especial!';
+
+  openOverlay();
+}
+
+function showCuriousOverlay() {
+  const overlay = document.getElementById('invite-overlay');
+  if (!overlay) return;
+
+  const message = CURIOUS_MESSAGES[Math.floor(Math.random() * CURIOUS_MESSAGES.length)];
+
+  document.getElementById('invite-overlay-label').textContent = 'Ei, você aí';
+  document.getElementById('invite-overlay-name').textContent = '👀 Convite não encontrado';
+  document.getElementById('invite-overlay-message').textContent = message;
+
+  openOverlay({ blocking: true });
+}
+
+function openOverlay({ blocking = false } = {}) {
+  const overlay = document.getElementById('invite-overlay');
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => overlay.classList.add('visible'));
+
+  // Bloqueio permanente: sem clique pra sair, sem timeout, site nunca aparece
+  if (blocking) {
+    overlay.classList.add('blocking');
+    return;
+  }
+
+  const dismiss = () => {
+    overlay.classList.remove('visible');
+    document.body.style.overflow = '';
+    overlay.removeEventListener('click', dismiss);
+  };
+
+  overlay.addEventListener('click', () => {
+    window.forcePlayMusic?.();
+    dismiss();
+  });
+}
+
+/* ---------- Convite Personalizado + RSVP ---------- */
+function getInviteToken() {
+  const pathMatch = window.location.pathname.match(/\/convite\/([a-f0-9-]{8,})/i);
+  if (pathMatch) return pathMatch[1];
+  return new URLSearchParams(window.location.search).get('convite');
+}
+
+async function initInvite() {
+  const token = getInviteToken();
+  const form = document.getElementById('rsvp-form');
+  const noTokenEl = document.getElementById('rsvp-no-token');
+
+  if (!token) {
+    if (noTokenEl) noTokenEl.classList.remove('hidden');
+    showCuriousOverlay();
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/convite/${token}`);
+    if (!response.ok) throw new Error('Convite não encontrado');
+    const guest = await response.json();
+
+    showInviteOverlay(guest);
+
+    const rsvpTitle = document.getElementById('rsvp-title');
+    if (rsvpTitle) rsvpTitle.textContent = `${guest.name}, sua presença é essencial!`;
+
+    if (guest.attending !== null && guest.attending !== undefined) {
+      document.getElementById('rsvp-message-text')?.classList.add('hidden');
+      form?.classList.add('hidden');
+      document.getElementById('rsvp-success')?.classList.remove('hidden');
+      setSuccessMessage(guest.attending);
+    } else {
+      form?.classList.remove('hidden');
+    }
+
+    initRSVPForm(token, guest);
+  } catch (err) {
+    console.error(err);
+    if (noTokenEl) noTokenEl.classList.remove('hidden');
+    showCuriousOverlay();
+  }
+}
+
+function setSuccessMessage(attending) {
+  const successText = document.getElementById('rsvp-success-text');
+  if (!successText) return;
+  successText.innerHTML = attending
+    ? 'Confirmação recebida! Obrigado 💌'
+    : 'Poxa, vamos sentir sua falta... 😢 tem certeza mesmo? Ainda dá tempo de mudar de ideia!<br><br>Se de verdade não rolar, manda um carinho pra gente pela chave Pix aí em cima — vai ajudar (e muito) na nossa lua de mel 🥹💛';
+}
+
+function initRSVPForm(token, guest) {
   const form = document.getElementById('rsvp-form');
   if (!form) return;
-  
+
   const successEl = document.getElementById('rsvp-success');
   const submitBtn = document.getElementById('rsvp-submit');
+  const changeMindBtn = document.getElementById('rsvp-change-mind');
+
+  changeMindBtn?.addEventListener('click', () => {
+    if (guest?.attending === false) {
+      form.querySelector('input[name="attending"][value="no"]').checked = true;
+    }
+    successEl.classList.add('hidden');
+    form.classList.remove('hidden');
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('rsvp-name').value.trim();
-    const guests = document.getElementById('rsvp-guests').value;
-    const message = document.getElementById('rsvp-message').value.trim();
+    const message = document.getElementById('rsvp-note').value.trim();
     const attending = document.querySelector('input[name="attending"]:checked').value === 'yes';
 
-    if (!name) {
-      showToast('Por favor, insira seu nome.');
-      return;
-    }
-
-    // Disable button
     submitBtn.disabled = true;
     submitBtn.querySelector('.btn-text').textContent = 'Enviando...';
 
@@ -245,18 +391,27 @@ function initRSVP() {
       const response = await fetch('/api/rsvp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, guests: parseInt(guests), message, attending })
+        body: JSON.stringify({ token, message, attending })
       });
 
       const data = await response.json();
 
       if (data.success) {
+        const card = form.closest('.rsvp-highlight-card');
+        if (card) card.style.minHeight = `${card.offsetHeight}px`;
+
+        setSuccessMessage(attending);
         form.classList.add('hidden');
         successEl.classList.remove('hidden');
-        showToast('Confirmação enviada com sucesso! 💌');
-        
-        // Confetti effect
-        createConfetti();
+        submitBtn.disabled = false;
+        submitBtn.querySelector('.btn-text').textContent = 'Confirmar Presença';
+
+        if (attending) {
+          showToast('Confirmação enviada com sucesso! 💌');
+          createConfetti();
+        } else {
+          showToast('Confirmação recebida 😢');
+        }
       } else {
         showToast('Erro ao enviar. Tente novamente.');
         submitBtn.disabled = false;
@@ -312,6 +467,10 @@ function initPix() {
   function fallbackCopyTextToClipboard(text) {
     const textArea = document.createElement("textarea");
     textArea.value = text;
+    // Fora da tela: evita que o foco role a página até aqui
+    textArea.style.position = 'fixed';
+    textArea.style.top = '0';
+    textArea.style.left = '-9999px';
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
@@ -323,6 +482,60 @@ function initPix() {
     }
     document.body.removeChild(textArea);
   }
+}
+
+/* ---------- Carrossel da Galeria (fotos do Drive) ---------- */
+async function initGalleryCarousel() {
+  const carousel = document.getElementById('gallery-carousel');
+  const track = document.getElementById('gallery-track');
+  const dotsEl = document.getElementById('gallery-dots');
+  const prevBtn = document.getElementById('gallery-prev');
+  const nextBtn = document.getElementById('gallery-next');
+  if (!carousel || !track) return;
+
+  try {
+    const response = await fetch('/api/gallery');
+    const photos = await response.json();
+
+    if (!photos.length) return;
+
+    track.innerHTML = photos.map(p => `
+      <div class="gallery-slide">
+        <img src="${p.image}" alt="${escapeHtmlMain(p.name)}" loading="lazy">
+      </div>
+    `).join('');
+
+    dotsEl.innerHTML = photos.map((_, i) => `<span class="gallery-dot${i === 0 ? ' active' : ''}"></span>`).join('');
+    const dots = dotsEl.querySelectorAll('.gallery-dot');
+
+    function updateActiveDot() {
+      const index = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    }
+
+    track.addEventListener('scroll', () => {
+      window.clearTimeout(track._scrollTimer);
+      track._scrollTimer = setTimeout(updateActiveDot, 100);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: track.clientWidth, behavior: 'smooth' });
+    });
+
+    carousel.classList.remove('hidden');
+  } catch (err) {
+    console.error('Erro ao carregar galeria:', err);
+  }
+}
+
+function escapeHtmlMain(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
 }
 
 /* ---------- Toast Notification ---------- */
@@ -363,6 +576,10 @@ function initMusic() {
       console.log('Autoplay prevented. Waiting for interaction.');
     });
   };
+
+  // Disponivel para forcar o play a partir de outro gesto do usuario
+  // (ex: toque na tela de boas-vindas do convite)
+  window.forcePlayMusic = startMusic;
 
   // Attempt autoplay immediately
   startMusic();

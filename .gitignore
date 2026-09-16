@@ -21,6 +21,10 @@ Desktop.ini
 .env
 .env.local
 .env.*.local
+.dev.vars
+
+# Cloudflare
+.wrangler/
 
 # Build
 dist/
