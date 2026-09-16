@@ -564,38 +564,43 @@ function initMusic() {
   music.currentTime = 10;
   music.volume = 0;
 
-  const startMusic = () => {
-    music.play().then(() => {
+  function tryAutoUnlock() {
+    playMusic();
+  }
+
+  function playMusic() {
+    return music.play().then(() => {
       control.classList.add('playing');
       fadeIn(music);
       // Remove interaction listeners once playing
-      document.removeEventListener('click', startMusic);
-      document.removeEventListener('scroll', startMusic);
-      document.removeEventListener('touchstart', startMusic);
+      document.removeEventListener('click', tryAutoUnlock);
+      document.removeEventListener('scroll', tryAutoUnlock);
+      document.removeEventListener('touchstart', tryAutoUnlock);
     }).catch(error => {
-      console.log('Autoplay prevented. Waiting for interaction.');
+      // Falhou de verdade (ex: navegador ainda nao liberou) - garante que
+      // o botao nao fique mostrando "tocando" sem tocar de fato
+      console.log('Não foi possível tocar a música:', error.message);
+      control.classList.remove('playing');
     });
-  };
+  }
 
   // Disponivel para forcar o play a partir de outro gesto do usuario
   // (ex: toque na tela de boas-vindas do convite)
-  window.forcePlayMusic = startMusic;
+  window.forcePlayMusic = playMusic;
 
   // Attempt autoplay immediately
-  startMusic();
+  playMusic();
 
   // Fallback: start on first user interaction
-  document.addEventListener('click', startMusic);
-  document.addEventListener('scroll', startMusic);
-  document.addEventListener('touchstart', startMusic);
+  document.addEventListener('click', tryAutoUnlock);
+  document.addEventListener('scroll', tryAutoUnlock);
+  document.addEventListener('touchstart', tryAutoUnlock);
 
   // Toggle Play/Pause
   control.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevent re-triggering startMusic if already active
+    e.stopPropagation(); // Prevent re-triggering tryAutoUnlock if already active
     if (music.paused) {
-      music.play();
-      control.classList.add('playing');
-      fadeIn(music);
+      playMusic();
     } else {
       music.pause();
       control.classList.remove('playing');
