@@ -5,7 +5,10 @@ const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ADMIN_SECRET = process.env.ADMIN_SECRET || 'sagrado';
+const ADMIN_SECRET = process.env.ADMIN_SECRET;
+if (!ADMIN_SECRET) {
+  throw new Error('ADMIN_SECRET não configurado no .env');
+}
 const GALLERY_FOLDER_ID = '1lx4_N3hdRg_MsgDr8AyuVzrE09hLL8hJ';
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
