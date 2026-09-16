@@ -15,7 +15,35 @@ document.addEventListener('DOMContentLoaded', () => {
   initMusic();
   initGalleryCarousel();
   initRsvpVisibility();
+  initMiniCountdown();
 });
+
+/* ---------- Mini contagem fixa (aparece ao rolar passando da contagem) ---------- */
+function initMiniCountdown() {
+  const mini = document.getElementById('mini-countdown');
+  const nav = document.getElementById('main-nav');
+  const countdownSection = document.getElementById('countdown');
+  if (!mini || !nav || !countdownSection) return;
+
+  function positionMini() {
+    mini.style.top = `${nav.offsetHeight}px`;
+  }
+  positionMini();
+  window.addEventListener('resize', positionMini);
+  window.addEventListener('scroll', positionMini, { passive: true });
+
+  const observer = new IntersectionObserver(([entry]) => {
+    if (Date.now() >= WEDDING_DATE) {
+      mini.classList.remove('visible');
+      return;
+    }
+
+    const scrolledPast = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+    mini.classList.toggle('visible', scrolledPast);
+  }, { threshold: 0 });
+
+  observer.observe(countdownSection);
+}
 
 /* ---------- Visibilidade do RSVP (some depois do casamento) ---------- */
 function initRsvpVisibility() {
@@ -175,6 +203,11 @@ function initCountdown() {
   const headingEl = document.getElementById('countdown-heading');
   const messageEl = document.getElementById('countdown-message');
 
+  const miniDaysEl = document.getElementById('mini-days');
+  const miniHoursEl = document.getElementById('mini-hours');
+  const miniMinutesEl = document.getElementById('mini-minutes');
+  const miniSecondsEl = document.getElementById('mini-seconds');
+
   let switchedToMarried = false;
 
   function switchToMarried() {
@@ -183,6 +216,24 @@ function initCountdown() {
     if (tagEl) tagEl.textContent = 'Já aconteceu';
     if (headingEl) headingEl.textContent = 'Somos Casados!';
     if (messageEl) messageEl.textContent = 'Cada segundo já é história nossa, como marido e mulher ✨';
+    document.getElementById('mini-countdown')?.classList.remove('visible');
+  }
+
+  function setValues(diff) {
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    animateValue(daysEl, days.toString().padStart(3, '0'));
+    animateValue(hoursEl, hours.toString().padStart(2, '0'));
+    animateValue(minutesEl, minutes.toString().padStart(2, '0'));
+    animateValue(secondsEl, seconds.toString().padStart(2, '0'));
+
+    if (miniDaysEl) miniDaysEl.textContent = days.toString().padStart(3, '0');
+    if (miniHoursEl) miniHoursEl.textContent = hours.toString().padStart(2, '0');
+    if (miniMinutesEl) miniMinutesEl.textContent = minutes.toString().padStart(2, '0');
+    if (miniSecondsEl) miniSecondsEl.textContent = seconds.toString().padStart(2, '0');
   }
 
   function updateCountdown() {
@@ -191,30 +242,11 @@ function initCountdown() {
 
     if (diff <= 0) {
       switchToMarried();
-
-      const elapsed = Math.abs(diff);
-      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
-
-      animateValue(daysEl, days.toString().padStart(3, '0'));
-      animateValue(hoursEl, hours.toString().padStart(2, '0'));
-      animateValue(minutesEl, minutes.toString().padStart(2, '0'));
-      animateValue(secondsEl, seconds.toString().padStart(2, '0'));
+      setValues(Math.abs(diff));
       return;
     }
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    // Animate number change
-    animateValue(daysEl, days.toString().padStart(3, '0'));
-    animateValue(hoursEl, hours.toString().padStart(2, '0'));
-    animateValue(minutesEl, minutes.toString().padStart(2, '0'));
-    animateValue(secondsEl, seconds.toString().padStart(2, '0'));
+    setValues(diff);
   }
 
   function animateValue(el, newVal) {
