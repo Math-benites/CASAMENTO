@@ -1546,36 +1546,18 @@ a {
   50% { box-shadow: 0 0 0 10px rgba(212, 165, 116, 0); }
 }
 
-.music-icon {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 18px;
+.vinyl-icon {
+  color: var(--gold-primary);
 }
 
-.music-control .bar {
-  width: 3px;
-  background: var(--gold-primary);
-  border-radius: 2px;
-  transition: height 0.3s ease;
+/* Gira enquanto toca */
+.music-control.playing .vinyl-icon {
+  animation: vinylSpin 3s linear infinite;
 }
 
-/* Playing Animation */
-.music-control.playing .bar {
-  animation: musicBar 1.2s ease-in-out infinite;
-}
-
-.music-control.playing .bar:nth-child(1) { height: 60%; animation-delay: 0.1s; }
-.music-control.playing .bar:nth-child(2) { height: 100%; animation-delay: 0.3s; }
-.music-control.playing .bar:nth-child(3) { height: 80%; animation-delay: 0.2s; }
-.music-control.playing .bar:nth-child(4) { height: 50%; animation-delay: 0.4s; }
-
-/* Paused State */
-.music-control .bar { height: 4px; }
-
-@keyframes musicBar {
-  0%, 100% { transform: scaleY(1); }
-  50% { transform: scaleY(1.5); }
+@keyframes vinylSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Adjust for Pix/Footer overlap if necessary */
