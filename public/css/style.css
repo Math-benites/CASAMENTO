@@ -107,6 +107,89 @@ a {
   border-bottom: 1px solid var(--border-subtle);
 }
 
+/* ---------- Mini Contagem Fixa ---------- */
+.mini-countdown {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(13, 13, 26, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.mini-countdown.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mini-countdown-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 6px 10px;
+  text-align: center;
+  min-width: 44px;
+}
+
+.mini-countdown-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.mini-countdown-label {
+  font-family: var(--font-elegant);
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.mini-countdown-sep {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--gold-primary);
+  opacity: 0.5;
+}
+
+@media (max-width: 480px) {
+  .mini-countdown {
+    gap: 5px;
+    padding: 8px 10px;
+  }
+
+  .mini-countdown-card {
+    min-width: 38px;
+    padding: 5px 6px;
+  }
+
+  .mini-countdown-value {
+    font-size: 0.95rem;
+  }
+
+  .mini-countdown-label {
+    font-size: 0.5rem;
+  }
+}
+
 .nav-inner {
   display: flex;
   align-items: center;
