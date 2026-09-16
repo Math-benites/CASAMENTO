@@ -1623,7 +1623,6 @@ a {
 }
 
 .vinyl-icon {
-  color: var(--gold-primary);
   opacity: 0.5;
   transition: opacity 0.3s ease;
 }
