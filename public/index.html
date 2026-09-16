@@ -465,7 +465,14 @@
   <!-- Background Music -->
   <audio id="bg-music" src="/audio/music.mp3" preload="auto" loop></audio>
   <button id="music-control" class="music-control" aria-label="Controlar música">
-    <img class="vinyl-icon" src="/images/music-record.png" alt="" width="32" height="32">
+    <svg class="vinyl-icon" width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10.5" fill="currentColor" opacity="0.12"/>
+      <circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="1"/>
+      <circle cx="12" cy="12" r="7.8" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+      <circle cx="12" cy="12" r="5.6" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+      <circle cx="12" cy="12" r="3.6" fill="currentColor" opacity="0.9"/>
+      <circle cx="12" cy="12" r="1.1" fill="var(--bg-primary)"/>
+    </svg>
   </button>
 
   <!-- Toast notification -->
