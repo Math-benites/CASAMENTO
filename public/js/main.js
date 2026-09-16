@@ -571,16 +571,19 @@ function initMusic() {
   function playMusic() {
     return music.play().then(() => {
       control.classList.add('playing');
+      control.classList.remove('needs-tap');
       fadeIn(music);
       // Remove interaction listeners once playing
       document.removeEventListener('click', tryAutoUnlock);
-      document.removeEventListener('scroll', tryAutoUnlock);
       document.removeEventListener('touchstart', tryAutoUnlock);
     }).catch(error => {
       // Falhou de verdade (ex: navegador ainda nao liberou) - garante que
-      // o botao nao fique mostrando "tocando" sem tocar de fato
+      // o botao nao fique mostrando "tocando" sem tocar de fato, e chama
+      // atencao pro botao pra um toque direto (unico gesto que os
+      // navegadores sempre aceitam pra liberar audio)
       console.log('Não foi possível tocar a música:', error.message);
       control.classList.remove('playing');
+      control.classList.add('needs-tap');
     });
   }
 
@@ -591,9 +594,10 @@ function initMusic() {
   // Attempt autoplay immediately
   playMusic();
 
-  // Fallback: start on first user interaction
+  // Fallback: destrava no primeiro toque/clique real na pagina
+  // ("scroll" nao conta como gesto valido pra autoplay nos navegadores,
+  // por isso nao entra aqui)
   document.addEventListener('click', tryAutoUnlock);
-  document.addEventListener('scroll', tryAutoUnlock);
   document.addEventListener('touchstart', tryAutoUnlock);
 
   // Toggle Play/Pause
