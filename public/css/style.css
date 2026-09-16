@@ -1247,6 +1247,82 @@ a {
   border-radius: 4px;
 }
 
+.gallery-slide {
+  cursor: zoom-in;
+}
+
+/* ---------- Gallery Lightbox ---------- */
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 25000;
+  background: rgba(5, 5, 12, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--gold-light);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-prev {
+  left: 12px;
+}
+
+.lightbox-next {
+  right: 12px;
+}
+
+@media (max-width: 480px) {
+  .lightbox-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
+}
+
 /* ---------- Invite Welcome Overlay ---------- */
 .invite-overlay {
   position: fixed;
